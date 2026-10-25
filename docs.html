@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brew &amp; Byte · Documentation</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.65;color:#2a1a12;background:#fff8ef}
+    header{position:sticky;top:0;background:#3b2116;color:#fff8ef;padding:.75rem 5%;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+    header a{color:#fff8ef;text-decoration:none;margin-left:1.25rem}
+    header a:focus-visible,a:focus-visible{outline:.1875rem solid #1f6feb;outline-offset:.1875rem}
+    .brand{font-family:Georgia,serif;font-weight:700;font-size:1.25rem;margin:0}
+    main{width:90%;max-width:52rem;margin:0 auto;padding:2rem 0 4rem}
+    h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.25}
+    h2{margin-top:2.5rem;border-bottom:.0625rem solid #e6d5c3;padding-bottom:.4rem}
+    a{color:#6b3e26}
+    code{background:#f1e4d6;padding:.1rem .35rem;border-radius:.25rem;font-size:.9em}
+    pre{background:#2a1a12;color:#fff8ef;padding:1rem;border-radius:.5rem;overflow-x:auto}
+    pre code{background:none;padding:0;color:inherit}
+    table{border-collapse:collapse;width:100%;margin:1rem 0;display:block;overflow-x:auto}
+    th,td{border:.0625rem solid #e6d5c3;padding:.5rem .75rem;text-align:left;vertical-align:top}
+    th{background:#f1e4d6}
+    hr{border:0;border-top:.0625rem solid #e6d5c3;margin:2rem 0}
+    .part{background:#fff;border:.0625rem solid #e6d5c3;border-radius:1rem;padding:.5rem 1.5rem 1.5rem;margin-top:2rem}
+  </style>
+</head>
+<body>
+  <header>
+    <p class="brand">Brew &amp; Byte · Docs</p>
+    <nav aria-label="Documentation"><a href="#overview">Overview</a><a href="#predictions">JS Drill</a><a href="index.html">Live site</a></nav>
+  </header>
+  <main>
+    <article class="part" id="overview"><h1>Brew &amp; Byte — Café Landing Page + JS Drill</h1>
+<p>A one-page, responsive and keyboard-accessible website for the neighbourhood café <strong>Brew &amp; Byte</strong>, plus a JavaScript output drill.</p>
+<p>Built with plain HTML, CSS and JavaScript — no frameworks, no build step.</p>
+<ul>
+<li><strong>Live site:</strong> <a href="https://brew-and-byte-omega.vercel.app">https://brew-and-byte-omega.vercel.app</a></li>
+<li><strong>Documentation:</strong> <a href="https://brew-and-byte-omega.vercel.app/docs.html">https://brew-and-byte-omega.vercel.app/docs.html</a></li>
+</ul>
+<h2>Run it</h2>
+<pre><code class="language-bash"># Website: just open the file
+open index.html            # or double-click it / use VS Code Live Server
+
+# JS drill
+cd snippets
+for f in *.js; do echo &quot;== $f&quot;; node &quot;$f&quot;; done
+</code></pre>
+<h2>Project structure</h2>
+<pre><code>brew-and-byte/
+├── index.html        # semantic page: header, nav, main, sections, articles, footer
+├── styles.css        # Flexbox nav, Grid menu, sticky header, badge, 768px media query
+├── script.js         # one delegated click listener for all &quot;Add to order&quot; buttons
+├── images/           # menu + hero images (SVG)
+├── snippets/         # 11 JS files for the output drill (#5 has var + let versions)
+├── PREDICTIONS.md    # prediction → real output → why, for every snippet
+└── README.md
+</code></pre>
+<h2>What's covered</h2>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Semantic HTML (<code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code>, <code>article</code> per item, <code>footer</code>)</td>
+<td><code>index.html</code></td>
+</tr>
+<tr>
+<td>Alt text on every image, labelled form with <code>type="email"</code> + <code>required</code></td>
+<td><code>index.html</code></td>
+</tr>
+<tr>
+<td>Visible focus styles + skip link, everything reachable with Tab</td>
+<td><code>styles.css</code> (<code>:focus-visible</code>)</td>
+</tr>
+<tr>
+<td>Flexbox nav / Grid menu with <code>repeat(auto-fit, minmax(220px, 1fr))</code> + comments on why</td>
+<td><code>styles.css</code></td>
+</tr>
+<tr>
+<td><code>rem</code> for fonts/spacing, <code>%</code> for widths, stacked nav at <code>max-width: 768px</code></td>
+<td><code>styles.css</code></td>
+</tr>
+<tr>
+<td>Sticky header, absolute <strong>Bestseller</strong> badge inside a relative card</td>
+<td><code>styles.css</code></td>
+</tr>
+<tr>
+<td>One delegated listener, <code>closest('button')</code>, <code>data-item</code>, live "Items in order: N"</td>
+<td><code>script.js</code></td>
+</tr>
+<tr>
+<td>Bubbling + delegation explained, with a button that adds a menu item later to prove it</td>
+<td><code>script.js</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Task 3 — Specificity</h2>
+<pre><code class="language-html">&lt;p id=&quot;price&quot; class=&quot;amount&quot;&gt;…&lt;/p&gt;   &lt;!-- placed inside &lt;section class=&quot;menu&quot;&gt; --&gt;
+</code></pre>
+<pre><code class="language-css">#price        { color: green; }
+.menu .amount { color: red; }
+p.amount      { color: blue; }
+</code></pre>
+<p><strong>Prediction:</strong> green. <strong>Result in the browser:</strong> green.</p>
+<p><strong>Why:</strong> when several rules match the same element, the browser compares specificity as (IDs, classes, elements):</p>
+<table>
+<thead>
+<tr>
+<th>Selector</th>
+<th>IDs</th>
+<th>Classes</th>
+<th>Elements</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>#price</code></td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td><strong>(1, 0, 0)</strong></td>
+</tr>
+<tr>
+<td><code>.menu .amount</code></td>
+<td>0</td>
+<td>2</td>
+<td>0</td>
+<td>(0, 2, 0)</td>
+</tr>
+<tr>
+<td><code>p.amount</code></td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>(0, 1, 1)</td>
+</tr>
+</tbody>
+</table>
+<p>The columns are compared left to right, and the first difference decides. <code>#price</code> has an ID and the others don't, so it wins no matter how many classes the others stack. Source order only matters when specificity is exactly equal. (Between the two losers, <code>.menu .amount</code> beats <code>p.amount</code> because 2 classes &gt; 1 class, so if the ID rule were removed the text would be red.)</p>
+<h2>Task 3 — <code>box-sizing: border-box</code></h2>
+<p>Take a card with <code>width: 300px; padding: 20px; border: 2px solid</code>.</p>
+<ul>
+<li><strong>Default (<code>content-box</code>):</strong> <code>width</code> sets only the content. The rendered card is <code>300 + 20 + 20 + 2 + 2 = 344px</code> wide. Padding and border are added on top, so cards overflow their grid columns and widths are hard to reason about.</li>
+<li><strong>With <code>border-box</code>:</strong> <code>width</code> includes padding and border. The rendered card is exactly <strong>300px</strong>; the content area shrinks to <code>300 − 40 − 4 = 256px</code>.</li>
+</ul>
+<p>That's why the stylesheet sets <code>*, *::before, *::after { box-sizing: border-box; }</code>: a <code>width: 100%</code> card with padding fits its grid cell exactly instead of spilling out.</p>
+<hr />
+<h2>JS output drill</h2>
+<p>All 10 snippets (and both versions of #5) are in <a href="#predictions"><code>snippets/</code></a>, with predictions, real Node output and explanations in <strong><a href="#predictions">PREDICTIONS.md</a></strong>.</p></article>
+    <article class="part" id="predictions"><h1>JS Output Drill — Predictions</h1>
+<p>Each snippet lives in its own file in <a href="#predictions"><code>snippets/</code></a> and was run with <code>node &lt;file&gt;</code> (Node v22).
+Format: <strong>prediction first</strong>, then the <strong>real output</strong>, then <strong>why</strong>.</p>
+<p>Run them all:</p>
+<pre><code class="language-bash">cd snippets
+for f in *.js; do echo &quot;== $f&quot;; node &quot;$f&quot;; done
+</code></pre>
+<hr />
+<h3>1 · <code>var</code> hoisting — <code>01-var-hoisting.js</code></h3>
+<pre><code class="language-js">console.log(a); var a = 5;
+</code></pre>
+<ul>
+<li><strong>Prediction:</strong> <code>undefined</code></li>
+<li><strong>Real output:</strong> <code>undefined</code></li>
+<li><strong>Why:</strong> <code>var a</code> is hoisted to the top of the scope and initialised to <code>undefined</code>; the <code>= 5</code> assignment only happens on line 2.</li>
+</ul>
+<hr />
+<h3>2 · <code>let</code> and the TDZ — <code>02-let-tdz.js</code></h3>
+<pre><code class="language-js">console.log(b); let b = 5;
+</code></pre>
+<ul>
+<li><strong>Prediction:</strong> <code>ReferenceError</code></li>
+<li><strong>Real output:</strong> <code>ReferenceError: Cannot access 'b' before initialization</code></li>
+<li><strong>Why:</strong> <code>let</code> is hoisted too, but stays in the Temporal Dead Zone (uninitialised) until its declaration line runs, so reading it earlier throws.</li>
+</ul>
+<hr />
+<h3>3 · Function declaration hoisting — <code>03-function-hoisting.js</code></h3>
+<pre><code class="language-js">sayHi(); function sayHi() { console.log('hi'); }
+</code></pre>
+<ul>
+<li><strong>Prediction:</strong> <code>hi</code></li>
+<li><strong>Real output:</strong> <code>hi</code></li>
+<li><strong>Why:</strong> Function declarations are hoisted with their full body, so they can be called before the line they're written on.</li>
+</ul>
+<hr />
+<h3>4 · Closure counter — <code>04-closure-counter.js</code></h3>
+<pre><code class="language-js">const c = makeCounter(); c(); c(); console.log(c()); // makeCounter returns () =&gt; ++count
+</code></pre>
+<ul>
+<li><strong>Prediction:</strong> <code>3</code></li>
+<li><strong>Real output:</strong> <code>3</code></li>
+<li><strong>Why:</strong> The returned arrow function closes over the same <code>count</code> variable, which survives between calls: 1, 2, then the logged call returns 3.</li>
+</ul>
+<hr />
+<h3>5a · <code>setTimeout</code> in a <code>var</code> loop — <code>05a-loop-var.js</code></h3>
+<pre><code class="language-js">for (var i = 0; i &lt; 3; i++) setTimeout(() =&gt; console.log(i));
+</code></pre>
+<ul>
+<li><strong>Prediction:</strong> <code>3</code> <code>3</code> <code>3</code></li>
+<li><strong>Real output:</strong>
+  <code>3
+  3
+  3</code></li>
+<li><strong>Why:</strong> <code>var</code> is function-scoped, so all three callbacks share ONE <code>i</code>; they run after the loop ends, when <code>i</code> is already 3.</li>
+</ul>
+<h3>5b · Same loop with <code>let</code> — <code>05b-loop-let.js</code></h3>
+<pre><code class="language-js">for (let i = 0; i &lt; 3; i++) setTimeout(() =&gt; console.log(i));
+</code></pre>
+<ul>
+<li><strong>Prediction:</strong> <code>0</code> <code>1</code> <code>2</code></li>
+<li><strong>Real output:</strong>
+  <code>0
+  1
+  2</code></li>
+<li><strong>Why:</strong> <code>let</code> is block-scoped and the loop creates a fresh <code>i</code> binding per iteration, so each callback captures its own value.</li>
+</ul>
+<hr />
+<h3>6 · <code>call</code> and <code>bind</code> — <code>06-call-bind.js</code></h3>
+<pre><code class="language-js">function intro(city) { return `${this.name} from ${city}`; }
+console.log(intro.call({ name: 'Ravi' }, 'Pune'), intro.bind({ name: 'Meena' })('Delhi'));
+</code></pre>
+<ul>
+<li><strong>Prediction:</strong> <code>Ravi from Pune Meena from Delhi</code></li>
+<li><strong>Real output:</strong> <code>Ravi from Pune Meena from Delhi</code></li>
+<li><strong>Why:</strong> <code>call</code> invokes immediately with <code>this</code> set to the first argument; <code>bind</code> returns a new function with <code>this</code> permanently fixed, which we then call.</li>
+</ul>
+<hr />
+<h3>7 · Regular method vs arrow function — <code>07-this-arrow.js</code></h3>
+<pre><code class="language-js">const user = { name: 'Asha', regular() { return this.name; }, arrow: () =&gt; this.name };
+console.log(user.regular(), user.arrow());
+</code></pre>
+<ul>
+<li><strong>Prediction:</strong> <code>Asha undefined</code></li>
+<li><strong>Real output:</strong> <code>Asha undefined</code></li>
+<li><strong>Why:</strong> A regular method gets <code>this</code> from the call site (<code>user</code>), but an arrow function has no own <code>this</code> — it uses the outer scope's <code>this</code> (in a Node module that's <code>module.exports</code>, <code>{}</code>), which has no <code>name</code>.</li>
+</ul>
+<hr />
+<h3>8 · Loose vs strict equality — <code>08-equality.js</code></h3>
+<pre><code class="language-js">console.log(0 == '0', 0 === '0', null == undefined, [] == false);
+</code></pre>
+<ul>
+<li><strong>Prediction:</strong> <code>true false true true</code></li>
+<li><strong>Real output:</strong> <code>true false true true</code></li>
+<li><strong>Why:</strong> <code>==</code> coerces types (<code>'0'</code> → 0; <code>[]</code> → <code>''</code> → 0 and <code>false</code> → 0), <code>===</code> doesn't, and <code>null == undefined</code> is a special-cased <code>true</code>.</li>
+</ul>
+<hr />
+<h3>9 · Truthy and falsy — <code>09-truthiness.js</code></h3>
+<pre><code class="language-js">console.log([!!'', !!'0', !![], !!{}, !!NaN]);
+</code></pre>
+<ul>
+<li><strong>Prediction:</strong> <code>[ false, true, true, true, false ]</code></li>
+<li><strong>Real output:</strong> <code>[ false, true, true, true, false ]</code></li>
+<li><strong>Why:</strong> Only <code>''</code>, <code>0</code>, <code>NaN</code>, <code>null</code>, <code>undefined</code>, <code>false</code> (and <code>0n</code>) are falsy; <code>'0'</code> is a non-empty string and every object/array — even empty — is truthy.</li>
+</ul>
+<hr />
+<h3>10 · <code>filter</code> → <code>map</code> → <code>reduce</code> — <code>10-filter-map-reduce.js</code></h3>
+<pre><code class="language-js">console.log([1, 2, 3, 4].filter((n) =&gt; n % 2).map((n) =&gt; n * 10).reduce((a, b) =&gt; a + b, 0));
+</code></pre>
+<ul>
+<li><strong>Prediction:</strong> <code>40</code></li>
+<li><strong>Real output:</strong> <code>40</code></li>
+<li><strong>Why:</strong> <code>n % 2</code> keeps odd numbers <code>[1, 3]</code>, <code>map</code> gives <code>[10, 30]</code>, and <code>reduce</code> sums them to <code>40</code>.</li>
+</ul></article>
+  </main>
+</body>
+</html>

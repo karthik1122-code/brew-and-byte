@@ -4,6 +4,9 @@ A one-page, responsive and keyboard-accessible website for the neighbourhood caf
 
 Built with plain HTML, CSS and JavaScript — no frameworks, no build step.
 
+- **Live site:** https://brew-and-byte-omega.vercel.app
+- **Documentation:** https://brew-and-byte-omega.vercel.app/docs.html
+
 ## Run it
 
 ```bash
