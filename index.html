@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Brew & Byte — a neighbourhood café serving espresso, cold brew and chai." />
+  <title>Brew &amp; Byte · Neighbourhood Café</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="logo" href="#top" aria-label="Brew and Byte home">Brew <span>&amp;</span> Byte</a>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <p class="order-count" aria-live="polite">Items in order: <strong id="order-count">0</strong></p>
+  </header>
+
+  <main id="main">
+    <section id="top" class="hero" aria-labelledby="hero-title">
+      <div class="hero-text">
+        <h1 id="hero-title">Good coffee, good code, good company.</h1>
+        <p>Freshly roasted beans, fast Wi-Fi and a quiet corner to think. Open every day, 7am – 10pm.</p>
+        <a class="btn" href="#menu">See the menu</a>
+      </div>
+      <img src="images/hero.svg" alt="A steaming cup of coffee on a warm brown background" width="400" height="260" />
+    </section>
+
+    <section id="about" class="about" aria-labelledby="about-title">
+      <h2 id="about-title">About us</h2>
+      <p>Brew &amp; Byte started as a tiny corner counter for students and developers. We roast in small batches every week and keep the menu short so every cup is right.</p>
+    </section>
+
+    <section id="menu" class="menu" aria-labelledby="menu-title">
+      <h2 id="menu-title">Our menu</h2>
+
+      <div class="menu-grid" id="menu-grid">
+        <article class="menu-card">
+          <span class="badge">Bestseller</span>
+          <img src="images/espresso.svg" alt="A small cup of dark espresso with crema on top" width="400" height="260" />
+          <h3>Espresso</h3>
+          <p>A short, strong double shot of our house roast.</p>
+          <p class="cost">₹120</p>
+          <button type="button" data-item="Espresso">Add to order</button>
+        </article>
+
+        <article class="menu-card">
+          <img src="images/cappuccino.svg" alt="A cappuccino with a thick layer of milk foam" width="400" height="260" />
+          <h3>Cappuccino</h3>
+          <p>Espresso with steamed milk and a thick, velvety foam.</p>
+          <p class="cost">₹160</p>
+          <button type="button" data-item="Cappuccino">Add to order</button>
+        </article>
+
+        <article class="menu-card">
+          <img src="images/cold-brew.svg" alt="A glass of cold brew coffee on a cool blue background" width="400" height="260" />
+          <h3>Cold Brew</h3>
+          <p>Steeped for 18 hours, smooth and low in bitterness.</p>
+          <p class="cost">₹180</p>
+          <button type="button" data-item="Cold Brew">Add to order</button>
+        </article>
+
+        <article class="menu-card">
+          <img src="images/masala-chai.svg" alt="A cup of spiced masala chai with warm orange tones" width="400" height="260" />
+          <h3>Masala Chai</h3>
+          <p>Black tea simmered with ginger, cardamom and milk.</p>
+          <p class="cost">₹90</p>
+          <button type="button" data-item="Masala Chai">Add to order</button>
+        </article>
+      </div>
+
+      <!-- Specificity test (Task 3). Inside .menu so all three rules match. -->
+      <p id="price" class="amount specificity-demo">Specificity test: what colour am I?</p>
+
+      <button type="button" class="btn btn-outline" id="add-special">Add today's special to the menu</button>
+    </section>
+
+    <section id="contact" class="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact us</h2>
+      <form class="contact-form" id="contact-form">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" autocomplete="name" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" autocomplete="email" required />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit" class="btn">Send message</button>
+        <p class="form-status" id="form-status" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Brew &amp; Byte · 12 Lake Road, Hyderabad · Open daily 7am – 10pm</p>
+    <p>&copy; 2026 Brew &amp; Byte</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
