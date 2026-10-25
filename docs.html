@@ -204,9 +204,7 @@ for f in *.js; do echo &quot;== $f&quot;; node &quot;$f&quot;; done
 <ul>
 <li><strong>Prediction:</strong> <code>3</code> <code>3</code> <code>3</code></li>
 <li><strong>Real output:</strong>
-  <code>3
-  3
-  3</code></li>
+  <code>3</code> <code>3</code> <code>3</code> (one per line)</li>
 <li><strong>Why:</strong> <code>var</code> is function-scoped, so all three callbacks share ONE <code>i</code>; they run after the loop ends, when <code>i</code> is already 3.</li>
 </ul>
 <h3>5b · Same loop with <code>let</code> — <code>05b-loop-let.js</code></h3>
@@ -215,9 +213,7 @@ for f in *.js; do echo &quot;== $f&quot;; node &quot;$f&quot;; done
 <ul>
 <li><strong>Prediction:</strong> <code>0</code> <code>1</code> <code>2</code></li>
 <li><strong>Real output:</strong>
-  <code>0
-  1
-  2</code></li>
+  <code>0</code> <code>1</code> <code>2</code> (one per line)</li>
 <li><strong>Why:</strong> <code>let</code> is block-scoped and the loop creates a fresh <code>i</code> binding per iteration, so each callback captures its own value.</li>
 </ul>
 <hr />
