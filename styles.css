@@ -1,8 +1,7 @@
-/* ===== Base ===== */
 *,
 *::before,
 *::after {
-  box-sizing: border-box; /* width now includes padding + border (see README) */
+  box-sizing: border-box;
 }
 
 :root {
@@ -16,7 +15,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem; /* so the sticky header doesn't cover section titles */
+  scroll-padding-top: 5rem; /* stops the sticky header covering headings */
 }
 
 body {
@@ -39,7 +38,7 @@ h1, h2, h3 {
   font-family: Georgia, "Times New Roman", serif;
 }
 
-/* Visible focus style on every interactive element */
+/* focus outline for keyboard users */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -61,13 +60,9 @@ textarea:focus-visible {
   top: 1rem;
 }
 
-/* ===== Header (sticky) ===== */
-/*
-  FLEXBOX for the nav bar: the header is a single row (logo · links · counter).
-  Flexbox is built for one-dimensional layouts — it lines items up along one axis,
-  spaces them with justify-content/gap and wraps naturally. We don't need rows AND
-  columns here, so Grid would be overkill.
-*/
+/* Header
+   I used flexbox here because the header is just one row (logo, links, counter).
+   Flexbox is good at lining things up in one direction. Grid would be overkill. */
 .site-header {
   position: sticky;
   top: 0;
@@ -123,7 +118,6 @@ textarea:focus-visible {
   text-align: center;
 }
 
-/* ===== Sections ===== */
 section {
   width: 90%;
   max-width: 70rem;
@@ -174,14 +168,10 @@ section {
   color: var(--cream);
 }
 
-/* ===== Menu (Grid) ===== */
-/*
-  GRID for the menu: the cards form a two-dimensional layout (rows AND columns).
-  repeat(auto-fit, minmax(220px, 1fr)) lets the browser decide how many 220px+
-  columns fit — 1 on a phone, 2–4 on wider screens — with no media queries, and
-  every card in a row gets equal width. Flexbox can't keep columns aligned across
-  rows like that.
-*/
+/* Menu
+   Grid is better here because the cards go in rows AND columns.
+   auto-fit + minmax(220px, 1fr) makes as many columns as fit, so it's 1 column
+   on a phone and 4 on a laptop without a media query, and the columns stay lined up. */
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -189,7 +179,7 @@ section {
 }
 
 .menu-card {
-  position: relative; /* containing block for the absolute badge */
+  position: relative; /* so the badge is positioned inside the card */
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -227,7 +217,7 @@ section {
 }
 
 .badge {
-  position: absolute; /* pinned to the card's corner, removed from normal flow */
+  position: absolute;
   top: 1.5rem;
   left: 1.5rem;
   padding: 0.2rem 0.75rem;
@@ -238,17 +228,17 @@ section {
   font-weight: 700;
 }
 
-/* ===== Specificity test (Task 3) ===== */
-#price { color: green; }        /* (1,0,0) — one ID         → wins */
-.menu .amount { color: red; }   /* (0,2,0) — two classes           */
-p.amount { color: blue; }       /* (0,1,1) — one class + one type  */
+/* specificity test - #price wins because an id beats classes (see README) */
+#price { color: green; }
+.menu .amount { color: red; }
+p.amount { color: blue; }
 
 .specificity-demo {
   margin-top: 2rem;
   font-weight: 700;
 }
 
-/* ===== Order panel ===== */
+/* order panel */
 .order-panel {
   margin-top: 2rem;
   padding: 1.25rem 1.5rem;
@@ -340,7 +330,7 @@ p.amount { color: blue; }       /* (0,1,1) — one class + one type  */
   font-size: 1.1rem;
 }
 
-/* ===== Contact form ===== */
+/* contact form */
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -365,7 +355,6 @@ p.amount { color: blue; }       /* (0,1,1) — one class + one type  */
   color: #1e7a3c;
 }
 
-/* ===== Footer ===== */
 .site-footer {
   padding: 2rem 5%;
   background: var(--coffee);
@@ -377,7 +366,7 @@ p.amount { color: blue; }       /* (0,1,1) — one class + one type  */
   margin: 0.25rem 0;
 }
 
-/* ===== Responsive: stacked nav below 768px ===== */
+/* below 768px the nav links stack */
 @media (max-width: 768px) {
   .site-header {
     flex-direction: column;

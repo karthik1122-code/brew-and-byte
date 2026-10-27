@@ -1,18 +1,10 @@
-// ===== Event delegation: one listener for every "Add to order" button =====
-//
-// EVENT BUBBLING: when you click a <button>, the click event fires on the button
-// first, then "bubbles" up through every ancestor — article → .menu-grid → section
-// → main → body → document. Any ancestor can listen for it.
-//
-// DELEGATION uses that: instead of attaching one listener per button, we attach ONE
-// listener to the parent .menu-grid. event.target tells us what was actually
-// clicked, and closest('button') walks up from there to the button (so a click on
-// any text/icon inside the button still counts).
-//
-// Because the listener lives on the grid — not on the buttons — menu items added
-// LATER (see "Add today's special" below) work automatically: their clicks bubble
-// up to the same grid listener. Per-button listeners would have to be re-attached
-// to every new card.
+// How the "Add to order" buttons work:
+// When you click a button, the click event first fires on the button and then
+// bubbles up through its parents (the article, then the menu grid, and so on).
+// So instead of adding a listener to every button, I add one listener to the
+// menu grid and check which button was clicked using event.target.closest().
+// This also works for cards added later (like today's special), because their
+// clicks bubble up to the same grid listener. No need to attach anything new.
 
 const menuGrid = document.getElementById('menu-grid');
 const orderCountEl = document.getElementById('order-count');
@@ -21,7 +13,7 @@ const orderEmpty = document.getElementById('order-empty');
 const orderTotal = document.getElementById('order-total');
 const clearBtn = document.getElementById('clear-order');
 
-// one entry per item, e.g. { name: 'Espresso', price: 120, qty: 2 }
+// each item looks like { name: 'Espresso', price: 120, qty: 2 }
 let order = [];
 
 function addItem(name, price) {
@@ -78,9 +70,9 @@ function renderOrder() {
 
 menuGrid.addEventListener('click', (event) => {
   const button = event.target.closest('button');
-  if (!button || !menuGrid.contains(button)) return; // clicked a card, not a button
+  if (!button) return; // clicked somewhere on the card, not the button
 
-  const item = button.dataset.item; // reads data-item="..."
+  const item = button.dataset.item;
   const price = Number(button.dataset.price);
   addItem(item, price);
 
@@ -90,8 +82,8 @@ menuGrid.addEventListener('click', (event) => {
   }, 900);
 });
 
-// Same idea for the cart: the − / + / Remove buttons are re-created on every
-// render, so one listener on the list handles all of them.
+// same trick for the cart - its buttons get re-created every render,
+// so one listener on the list handles all of them
 orderList.addEventListener('click', (event) => {
   const button = event.target.closest('button');
   if (!button) return;
@@ -109,7 +101,7 @@ clearBtn.addEventListener('click', () => {
   renderOrder();
 });
 
-// ===== Proves delegation works for items added later =====
+// adds a new card after the page has loaded (to test delegation)
 const addSpecialBtn = document.getElementById('add-special');
 
 addSpecialBtn.addEventListener('click', () => {
@@ -127,12 +119,12 @@ addSpecialBtn.addEventListener('click', () => {
   addSpecialBtn.textContent = "Today's special added";
 });
 
-// ===== Contact form (front-end only) =====
+// contact form (no backend yet, just shows a thank-you message)
 const form = document.getElementById('contact-form');
 const statusEl = document.getElementById('form-status');
 
 form.addEventListener('submit', (event) => {
-  event.preventDefault(); // `required` + type="email" already validated the fields
+  event.preventDefault();
   const name = form.elements.name.value.trim();
   statusEl.textContent = `Thanks, ${name}! We'll get back to you soon.`;
   form.reset();
