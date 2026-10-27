@@ -42,6 +42,7 @@ brew-and-byte/
 | Sticky header, absolute **Bestseller** badge inside a relative card | `styles.css` |
 | One delegated listener, `closest('button')`, `data-item`, live "Items in order: N" | `script.js` |
 | Bubbling + delegation explained, with a button that adds a menu item later to prove it | `script.js` |
+| Order panel: change quantity with − / +, remove items, clear the order, live total | `script.js` |
 
 ---
 

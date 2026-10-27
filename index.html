@@ -49,7 +49,7 @@
           <h3>Espresso</h3>
           <p>A short, strong double shot of our house roast.</p>
           <p class="cost">₹120</p>
-          <button type="button" data-item="Espresso">Add to order</button>
+          <button type="button" data-item="Espresso" data-price="120">Add to order</button>
         </article>
 
         <article class="menu-card">
@@ -57,7 +57,7 @@
           <h3>Cappuccino</h3>
           <p>Espresso with steamed milk and a thick, velvety foam.</p>
           <p class="cost">₹160</p>
-          <button type="button" data-item="Cappuccino">Add to order</button>
+          <button type="button" data-item="Cappuccino" data-price="160">Add to order</button>
         </article>
 
         <article class="menu-card">
@@ -65,7 +65,7 @@
           <h3>Cold Brew</h3>
           <p>Steeped for 18 hours, smooth and low in bitterness.</p>
           <p class="cost">₹180</p>
-          <button type="button" data-item="Cold Brew">Add to order</button>
+          <button type="button" data-item="Cold Brew" data-price="180">Add to order</button>
         </article>
 
         <article class="menu-card">
@@ -73,7 +73,7 @@
           <h3>Masala Chai</h3>
           <p>Black tea simmered with ginger, cardamom and milk.</p>
           <p class="cost">₹90</p>
-          <button type="button" data-item="Masala Chai">Add to order</button>
+          <button type="button" data-item="Masala Chai" data-price="90">Add to order</button>
         </article>
       </div>
 
@@ -81,6 +81,16 @@
       <p id="price" class="amount specificity-demo">Specificity test: what colour am I?</p>
 
       <button type="button" class="btn btn-outline" id="add-special">Add today's special to the menu</button>
+
+      <aside class="order-panel" aria-labelledby="order-title">
+        <h3 id="order-title">Your order</h3>
+        <ul class="order-list" id="order-list"></ul>
+        <p class="order-empty" id="order-empty">Nothing added yet. Pick something from the menu.</p>
+        <div class="order-footer">
+          <p class="order-total">Total: <strong id="order-total">₹0</strong></p>
+          <button type="button" class="btn btn-outline" id="clear-order" disabled>Clear order</button>
+        </div>
+      </aside>
     </section>
 
     <section id="contact" class="contact" aria-labelledby="contact-title">
